@@ -5,8 +5,19 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>국립공원을 지키는 힘을 업그레이드 해주세요!</title>
   <style>
-    :root{/*bg:#f7f9fb;--card:#ffffff;--accent:#0b6b4f;--muted:#666;--maxw:780px*/}
-    body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR","Helvetica Neue",Arial;smooth-text-rendering:antialiased;background:var(--bg);color:#111}
+    :root {
+      --bg:#f7f9fb;
+      --card:#ffffff;
+      --accent:#0b6b4f;
+      --muted:#666;
+      --maxw:780px;
+    }
+    body {
+      margin:0;
+      font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR","Helvetica Neue",Arial;
+      background:var(--bg);
+      color:#111;
+    }
     .wrap{max-width:var(--maxw);margin:24px auto;padding:20px}
     .card{background:var(--card);border-radius:14px;box-shadow:0 6px 24px rgba(12,20,30,0.07);padding:28px}
     header h1{margin:0 0 6px;font-size:20px;color:var(--accent)}
@@ -15,10 +26,7 @@
     .cta{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
     .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600}
     .btn.secondary{background:#eee;color:#111}
-    .pdf-frame{width:100%;height:60vh;border:1px solid #e6e9ee;border-radius:8px;overflow:hidden;margin-top:14px}
-    .note{font-size:13px;color:var(--muted);margin-top:12px}
-    .share{display:flex;gap:8px;margin-top:12px}
-    .small{font-size:13px;color:#444}
+    .pdf-frame{width:100%;height:80vh;border:1px solid #e6e9ee;border-radius:8px;overflow:hidden;margin-top:14px}
     footer{margin-top:18px;color:var(--muted);font-size:13px}
     @media(max-width:520px){.card{padding:18px}}
   </style>
@@ -35,16 +43,22 @@
         <p>회원님과 함께 지켜낸 설악산과 흑산도의 기적, 더 단단한 내일을 위해 손잡아 주십시오.</p>
 
         <div class="cta">
-          <a class="btn" id="open-pdf" href="letter.pdf" target="_blank" rel="noopener">PDF로 보기 / 다운로드</a>
-          <a class="btn secondary" id="open-remote" href="https://mrmweb.hsit.co.kr/v2/?server=Zg3sGUfgO%2B1mpROswcBFvg==&action=incdonation" target="_blank" rel="noopener">증액 신청하러 가기</a>
-          <button class="btn secondary" id="copy-link" onclick="copyLink()">링크 복사</button>
+          <a class="btn" href="letter.pdf" target="_blank" rel="noopener">PDF로 보기 / 다운로드</a>
+          <a class="btn secondary" href="https://mrmweb.hsit.co.kr/v2/?server=Zg3sGUfgO%2B1mpROswcBFvg==&action=incdonation" target="_blank" rel="noopener">증액 신청하러 가기</a>
+          <button class="btn secondary" onclick="copyLink()">링크 복사</button>
         </div>
 
-        <div class="pdf-frame" id="pdf-frame">
-          <iframe src="letter.pdf" title="편지 PDF" width="100%" height="100%" style="border:0"></iframe>
+        <!-- ✅ PDF.js 뷰어 적용 부분 -->
+        <div class="pdf-frame">
+          <iframe
+            src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://NPCN-friends.github.io/donation-letter/letter.pdf"
+            title="편지 PDF"
+            width="100%"
+            height="100%"
+            style="border:0;">
+          </iframe>
         </div>
 
-    
       </div>
     </div>
   </div>
@@ -52,7 +66,9 @@
   <script>
     function copyLink(){ 
       const url = location.href;
-      navigator.clipboard?.writeText(url).then(()=>{ alert('페이지 링크가 복사되었습니다. SMS에 붙여넣기 하세요.'); }, ()=>{ prompt('링크를 복사하려면 아래 주소를 복사하세요:', url); });
+      navigator.clipboard?.writeText(url)
+        .then(()=>{ alert('페이지 링크가 복사되었습니다. SMS에 붙여넣기 하세요.'); })
+        .catch(()=>{ prompt('링크를 복사하려면 아래 주소를 복사하세요:', url); });
     }
   </script>
 </body>
